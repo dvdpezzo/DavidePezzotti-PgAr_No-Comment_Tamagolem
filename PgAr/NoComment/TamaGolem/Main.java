@@ -7,10 +7,10 @@ import java.util.Vector;
 
 
 public class Main {
-    private static final int G = 10; //valori da modificare
+    private static final int G = 1; //valori da modificare
     private static final int V = 10; //valori da modificare
-    private static final int P = 10; //valori da modificare
-    private static final int S = 10; //valori da modificare
+    private static final int P = 3; //valori da modificare
+    private static final int S = (2*G*P); //valori da modificare
 
     public static void main(String args[]) {
         //fase di setup
