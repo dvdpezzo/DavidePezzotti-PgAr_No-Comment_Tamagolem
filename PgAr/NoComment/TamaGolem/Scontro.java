@@ -1,7 +1,5 @@
 package PgAr.NoComment.TamaGolem;
 
-import java.util.Vector;
-
 
 public class Scontro {
 
@@ -9,7 +7,13 @@ public class Scontro {
         if(vinciParita(g1, g2) == true) {
             System.out.println("Partita finita!");
         } else {
-
+            for (int i=0; i< g1.getNumeroTamagolem(); i++){
+                Tamagolem tama1 = g1.scegliTamaPerScontro(i);
+                tama1.attacca();
+                Tamagolem tama2 = g2.scegliTamaPerScontro(i);
+                tama2.attacca();
+                //da completare, prima settare come fanno ad attaccare e subire danni i tamagolem
+            }
         }
     }
 

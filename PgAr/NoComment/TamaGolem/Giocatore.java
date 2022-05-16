@@ -26,9 +26,6 @@ public class Giocatore {
         return pietre;
     }
 
-    public void setPietre(Vector<PietraElementale> pietre) {
-        this.pietre = pietre;
-    }
 
     //questo metodo crea S pietre elementali e le aggiunge al vettore del giocatore(pietre)
     public void setPietrePerGiocatore(int S) {
@@ -49,9 +46,14 @@ public class Giocatore {
                     pietra = new PietraElementale(Elementi.ARIA.name());
                     break;
             }
-            pietre.add(pietra);
+            aggiungiPietra(pietra);
         }
     }
+
+    private void aggiungiPietra(PietraElementale pietra) {
+        pietre.add(pietra);
+    }
+
     public void visualizzaPietre() {
         for (int i=0; i<pietre.size(); i++){
             System.out.println(i + ".\t" + pietre.elementAt(i).toString());
@@ -77,8 +79,8 @@ public class Giocatore {
         this.tamagolems.add(tamagolem);
     }
 
-    public Tamagolem scegliTama(){
-        return null;
+    public Tamagolem scegliTamaPerScontro(int i){
+        return tamagolems.elementAt(i);
     }
 
     private void ScegliPietre(){
@@ -90,8 +92,8 @@ public class Giocatore {
     }
     public void schieraTamagolem(int vita, int numeroTama, int pietrePerTama) {
         Tamagolem tamagolem = new Tamagolem(vita); //creo un tama di vita v
-        if (tamagolems.size() <= numeroTama){
-            tamagolems.add(tamagolem); //lo aggiungo ai tama del giocatore
+        if (getNumeroTamagolem() <= numeroTama){
+            aggiungiTamagolems(tamagolem); //lo aggiungo ai tama del giocatore
             System.out.println("Hai creato un tamagolem");
             System.out.println("Quali pietre vuoi far mangiare a questo Tamagolem?\nScegline " + pietrePerTama);
             for(int i = 0; i < pietrePerTama; i++){

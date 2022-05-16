@@ -43,7 +43,9 @@ public class Main {
     Determinazione vincita scontro
     Inserire questi metodi in un ciclo do while(G > 0 per entrambi i giocatori)
      */
+        Scontro scontro = new Scontro();
 
+       scontro.vinciScontro(gioc1, gioc2);
 
 
 
