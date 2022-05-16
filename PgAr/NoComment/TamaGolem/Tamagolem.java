@@ -11,14 +11,14 @@ public class Tamagolem {
     }
 
     public int attacca(){
-
+        return 0;
     }
 
     public int togliVita(){
-
+        return 0;
     }
 
     public void mangiaPietra(PietraElementale pietraElementale){
-        this.pietreMangiate.add(pietraElementale);
+        pietreMangiate.add(pietraElementale);
     }
 }

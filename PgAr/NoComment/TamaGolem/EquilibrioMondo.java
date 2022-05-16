@@ -7,7 +7,7 @@ public class EquilibrioMondo {
     private Elementi tipoElementi;
 
     private boolean confrontaElementi(){
-
+        return true;
     }
 
     public void generaEquilibrio(int numeroElementi){
@@ -15,7 +15,6 @@ public class EquilibrioMondo {
     }
 
     public Map visualizzaEquilibrio(){
-        
-
+        return null;
     }
 }
