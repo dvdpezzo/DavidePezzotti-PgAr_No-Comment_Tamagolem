@@ -15,6 +15,7 @@ public class EquilibrioMondo {
     }
 
     public Map visualizzaEquilibrio(){
+        
 
     }
 }
