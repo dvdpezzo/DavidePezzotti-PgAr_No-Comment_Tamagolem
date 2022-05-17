@@ -1,10 +1,19 @@
 package PgAr.NoComment.TamaGolem;
 
-import java.util.Vector;
+import java.util.Queue;
 
 public class Tamagolem {
     private int vita;
-    private Vector<PietraElementale> pietreMangiate;
+
+    public int getVita() {
+        return vita;
+    }
+
+    public void setVita(int vita) {
+        this.vita = vita;
+    }
+
+    private Queue<PietraElementale> pietreMangiate;
 
     public Tamagolem(int vita) {
         this.vita = vita;

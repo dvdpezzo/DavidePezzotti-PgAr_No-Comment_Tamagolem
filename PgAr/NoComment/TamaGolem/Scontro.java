@@ -4,7 +4,7 @@ package PgAr.NoComment.TamaGolem;
 public class Scontro {
 
     public void vinciScontro(Giocatore g1, Giocatore g2){
-        if(vinciParita(g1, g2) == true) {
+        if(vinciParita(g1, g2)) {
             System.out.println("Partita finita!");
         } else {
             for (int i=0; i< g1.getNumeroTamagolem(); i++){
