@@ -6,11 +6,11 @@ import java.util.*;
 
 public class EquilibrioMondo {
     //aggiungere altri 5 elementi
-    String attacco[]={"Terra", "Aria","Acqua","Fuoco"};
-    String tipo[]={"Terra", "Aria","Acqua","Fuoco"};
+    String[] attacco ={"Terra", "Aria","Acqua","Fuoco"};
+    String[] tipo ={"Terra", "Aria","Acqua","Fuoco"};
 
-    public static void generaEquilibrio (String attacco[], String tipo[], Integer matrice[][], int livello) {
-        int rand1=0, rand2=0, rand3=0, rand4=0, rand5=0, rand6=0, rand7=0, rand8=0;
+    public void generaEquilibrio (Integer[][] matrice, int livello) {
+        int rand1, rand2, rand3, rand4, rand5, rand6, rand7, rand8;
         Random rand= new Random();
         switch(livello) {
             case 4:
@@ -24,19 +24,19 @@ public class EquilibrioMondo {
 
                     }while (rand1+rand2+rand3!=0||rand1==0||rand2==0||rand3==0);
 
-                    if (attacco[0] == tipo[i]) {
+                    if (attacco[0].equals(tipo[i])) {
                         matrice[0][i]=0;
                         matrice[1][i]=rand1;
                         matrice[2][i]=rand2;
                         matrice[3][i]=rand3;
                     }
-                    else if (attacco[1]== tipo[i]) {
+                    else if (attacco[1].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=0;
                         matrice[2][i]=rand2;
                         matrice[3][i]=rand3;
                     }
-                    else if (attacco[2]==tipo[i]) {
+                    else if (attacco[2].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=0;
@@ -63,7 +63,7 @@ public class EquilibrioMondo {
 
                     }while (rand1+rand2+rand3+rand4+rand5+rand6!=0||rand1==0||rand2==0||rand3==0||rand4==0||rand5==0||rand6==0);
 
-                    if (attacco[0] == tipo[i]) {
+                    if (attacco[0].equals(tipo[i])) {
                         matrice[0][i]=0;
                         matrice[1][i]=rand1;
                         matrice[2][i]=rand2;
@@ -73,7 +73,7 @@ public class EquilibrioMondo {
                         matrice[6][i]=rand6;
 
                     }
-                    else if (attacco[1]== tipo[i]) {
+                    else if (attacco[1].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=0;
                         matrice[2][i]=rand2;
@@ -82,7 +82,7 @@ public class EquilibrioMondo {
                         matrice[5][i]=rand5;
                         matrice[6][i]=rand6;
                     }
-                    else if (attacco[2]==tipo[i]) {
+                    else if (attacco[2].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=0;
@@ -91,7 +91,7 @@ public class EquilibrioMondo {
                         matrice[5][i]=rand5;
                         matrice[6][i]=rand6;
                     }
-                    else if (attacco[3]==tipo[i]){
+                    else if (attacco[3].equals(tipo[i])){
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -100,7 +100,7 @@ public class EquilibrioMondo {
                         matrice[5][i]=rand5;
                         matrice[6][i]=rand6;
                     }
-                    else if (attacco[4]==tipo[i]) {
+                    else if (attacco[4].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -109,7 +109,7 @@ public class EquilibrioMondo {
                         matrice[5][i]=rand5;
                         matrice[6][i]=rand6;
                     }
-                    else if (attacco[5]==tipo[i]) {
+                    else if (attacco[5].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -118,7 +118,7 @@ public class EquilibrioMondo {
                         matrice[5][i]=0;
                         matrice[6][i]=rand6;
                     }
-                    else if (attacco[6]==tipo[i]) {
+                    else if (attacco[6].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -143,7 +143,7 @@ public class EquilibrioMondo {
 
                     }while (rand1+rand2+rand3+rand4+rand5+rand6+rand7+rand8!=0||rand1==0||rand2==0||rand3==0||rand4==0||rand5==0||rand6==0||rand7==0||rand8==0);
 
-                    if (attacco[0] == tipo[i]) {
+                    if (attacco[0].equals(tipo[i])) {
                         matrice[0][i]=0;
                         matrice[1][i]=rand1;
                         matrice[2][i]=rand2;
@@ -155,7 +155,7 @@ public class EquilibrioMondo {
                         matrice[8][i]=rand8;
 
                     }
-                    else if (attacco[1]== tipo[i]) {
+                    else if (attacco[1].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=0;
                         matrice[2][i]=rand2;
@@ -166,7 +166,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[2]==tipo[i]) {
+                    else if (attacco[2].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=0;
@@ -177,7 +177,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[3]==tipo[i]){
+                    else if (attacco[3].equals(tipo[i])){
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -188,7 +188,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[4]==tipo[i]) {
+                    else if (attacco[4].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -199,7 +199,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[5]==tipo[i]) {
+                    else if (attacco[5].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -210,7 +210,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[6]==tipo[i]) {
+                    else if (attacco[6].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -221,7 +221,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=rand7;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[7]==tipo[i]) {
+                    else if (attacco[7].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -232,7 +232,7 @@ public class EquilibrioMondo {
                         matrice[7][i]=0;
                         matrice[8][i]=rand8;
                     }
-                    else if (attacco[8]==tipo[i]) {
+                    else if (attacco[8].equals(tipo[i])) {
                         matrice[0][i]=rand1;
                         matrice[1][i]=rand2;
                         matrice[2][i]=rand3;
@@ -251,17 +251,17 @@ public class EquilibrioMondo {
     }
 
 
-    public int confrontaElementi (String elemento1, String elemento2, Integer matrice[][], String attacco[], String tipo[]){
+    public int confrontaElementi (String elemento1, String elemento2, Integer[][] matrice, String[] attacco, String[] tipo){
         for (int i=0; i< tipo.length; i++)
             for (int j=0; j< attacco.length; j++){
-                if (elemento1 == attacco[j] && elemento2== tipo[i])
+                if (elemento1.equals(attacco[j]) && elemento2.equals(tipo[i]))
                     return matrice[j][i];
             }
         //non ritornerà mai zero
         return 0;
     }
 
-    public void stampaEquilibrio(Integer matrice[][], String attacco[], String tipo[]){
+    public void stampaEquilibrio(Integer[][] matrice, String[] attacco, String[] tipo){
         System.out.print("       ");
 
         for (int i=0; i< attacco.length; i++)

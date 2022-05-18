@@ -8,9 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
         //fase di setup
-
+        Integer[][] matrice = new Integer[0][0];
     /* Creazione equilibrio mondo di n elementi */
-
+        EquilibrioMondo equilibrioMondo = new EquilibrioMondo();
+        equilibrioMondo.generaEquilibrio(matrice, 10);
 
     /* Creazione di S pietre totali e casuali da suddividere tra i due giocatori in 2 gruppi da P = S/2 */
 
