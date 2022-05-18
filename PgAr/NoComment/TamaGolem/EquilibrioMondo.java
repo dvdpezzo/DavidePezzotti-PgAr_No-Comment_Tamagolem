@@ -1,9 +1,5 @@
 package PgAr.NoComment.TamaGolem;
-
 import java.util.*;
-
-
-
 public class EquilibrioMondo {
     //aggiungere altri 5 elementi
     String[] attacco ={"Terra", "Aria","Acqua","Fuoco"};
@@ -261,7 +257,7 @@ public class EquilibrioMondo {
         return 0;
     }
 
-    public void stampaEquilibrio(Integer[][] matrice, String[] attacco, String[] tipo){
+    public void stampaEquilibrio(Integer[][] matrice){
         System.out.print("       ");
 
         for (int i=0; i< attacco.length; i++)

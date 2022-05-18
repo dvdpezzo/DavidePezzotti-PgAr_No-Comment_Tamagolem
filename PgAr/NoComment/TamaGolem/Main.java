@@ -1,5 +1,7 @@
 package PgAr.NoComment.TamaGolem;
 
+import java.util.Vector;
+
 public class Main {
     private static final int G = 1; //valori da modificare
     private static final int V = 10; //valori da modificare
@@ -9,16 +11,20 @@ public class Main {
     public static void main(String[] args) {
         //fase di setup
         Integer[][] matrice = new Integer[0][0];
+        Vector<Tamagolem> tamagolem1 = new Vector<>(G);
+        Vector<Tamagolem> tamagolem2 = new Vector<>(G);
+        Vector<PietraElementale> pietraElementale1 = new Vector<>(P);
+        Vector<PietraElementale> pietraElementale2 = new Vector<>(P);
     /* Creazione equilibrio mondo di n elementi */
         EquilibrioMondo equilibrioMondo = new EquilibrioMondo();
         equilibrioMondo.generaEquilibrio(matrice, 10);
 
     /* Creazione di S pietre totali e casuali da suddividere tra i due giocatori in 2 gruppi da P = S/2 */
 
-        Giocatore gioc1 = new Giocatore("Giocatore 1");
+        Giocatore gioc1 = new Giocatore("Giocatore 1", tamagolem1, pietraElementale1 );
         gioc1.setPietrePerGiocatore(P);
 
-        Giocatore gioc2 = new Giocatore("Giocatore 2");
+        Giocatore gioc2 = new Giocatore("Giocatore 2", tamagolem2, pietraElementale2);
         gioc2.setPietrePerGiocatore(P);
         //fase di scontro
 
@@ -50,6 +56,7 @@ public class Main {
     vince chi ha G>0
     Stampa equilibrio
      */
+        equilibrioMondo.stampaEquilibrio(matrice);
     }
 
 }

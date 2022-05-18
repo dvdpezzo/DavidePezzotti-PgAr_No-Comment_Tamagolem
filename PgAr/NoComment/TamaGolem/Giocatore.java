@@ -12,21 +12,12 @@ public class Giocatore {
     private Vector<PietraElementale> pietre;
 
     //costruttore Giocatore
-    public Giocatore(String nome) {
+
+    public Giocatore(String nome, Vector<Tamagolem> tamagolems, Vector<PietraElementale> pietre) {
         this.nome = nome;
+        this.tamagolems = tamagolems;
+        this.pietre = pietre;
     }
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Vector<PietraElementale> getPietre() {
-        return pietre;
-    }
-
 
     //questo metodo crea S pietre elementali e le aggiunge al vettore del giocatore(pietre)
     public void setPietrePerGiocatore(int S) {
@@ -46,19 +37,8 @@ public class Giocatore {
     private void aggiungiPietra(PietraElementale pietra) {
         pietre.add(pietra);
     }
-
-    public Vector<Tamagolem> getTamagolems() {
-        return tamagolems;
-    }
-    private void ScegliPietre(){
-
-    }
-
     public Tamagolem scegliTamaPerScontro(int i){
         return tamagolems.elementAt(i);
-    }
-    public void setTamagolems(Vector<Tamagolem> tamagolems) {
-        this.tamagolems = tamagolems;
     }
     // metodi per schierare tama:
     public void schieraTamagolem(int vita, int numeroTama, int pietrePerTama) {
