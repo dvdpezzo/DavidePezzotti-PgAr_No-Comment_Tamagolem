@@ -9,15 +9,15 @@ public class Tamagolem {
         return vita;
     }
 
-    private Vector<PietraElementale> pietreMangiate;
-
-    public Tamagolem(int vita, Vector<PietraElementale> pietreMangiate) {
+    private Vector<String> pietreMangiate;
+    //costruttore
+    public Tamagolem(int vita, Vector<String> pietreMangiate) {
         this.vita = vita;
         this.pietreMangiate = pietreMangiate;
     }
 
-    public PietraElementale scagliaPietra(int i){
-        pietreMangiate.get(i);
+    public String scagliaPietra(int i){
+        return pietreMangiate.get(i);
     }
 
     public int togliVita(int danniSubiti){ //(setVita)
@@ -26,7 +26,7 @@ public class Tamagolem {
         return vita;
     }
 
-    public void mangiaPietra(PietraElementale pietraElementale){
+    public void mangiaPietra(String pietraElementale){
         pietreMangiate.add(pietraElementale);
     }
 }

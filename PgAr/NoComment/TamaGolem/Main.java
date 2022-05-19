@@ -1,87 +1,148 @@
 package PgAr.NoComment.TamaGolem;
 
+import it.unibs.fp.mylib.InputDati;
+
 import java.util.Vector;
 
 public class Main {
-    private static final int tamagolem = 1; //valori da modificare
-    private static final int vita = 10; //valori da modificare
-    private static final int pietre = 3; //valori da modificare
-    private static final int sacchettoPietreGiocatore = (2* tamagolem * pietre); //valori da modificare
+
+
+    private static final int VITA = 10;
+    public static final String SCELTA = "Premere 1, per iniziare una nuova partita, premere 0 per chiudere il programma";
+    public static final String MEX_BENVENUTO = "Benvenuta/o su Tamagolem, prima di iniziare facci sapere con quanti tipi di pietre vuoi iniziare:";
+    public static final String LIVELLO_FACILE = "4. Livello facile";
+    public static final String LIVELLO_MEDIO = "7. Livello medio";
+    public static final String LIVELLO_DIFFICILE = "9. Livello difficile";
+    public static final String IN_NOME = "Inserisci il tuo nome giocatore";
+    public static final String SCONTRO_VINTO = "Lo scontro l'ha vinto il Tamagolem di ";
 
     public static void main(String[] args) {
-        //fase di setup
-        Integer[][] matrice = new Integer[0][0];
-        Vector<Tamagolem> tamagolem1Vector = new Vector<>(tamagolem);
-        Vector<Tamagolem> tamagolem2Vector = new Vector<>(tamagolem);
-        Vector<PietraElementale> pietraElementale1 = new Vector<>(pietre);
-        Vector<PietraElementale> pietraElementale2 = new Vector<>(pietre);
-    /* Creazione equilibrio mondo di n elementi */
-        EquilibrioMondo equilibrioMondo = new EquilibrioMondo();
-        equilibrioMondo.generaEquilibrio(matrice, 10);
-
-    /* Creazione di S pietre totali e casuali da suddividere tra i due giocatori in 2 gruppi da P = S/2 */
-
-        Giocatore gioc1 = new Giocatore("Giocatore 1", tamagolem1Vector, pietraElementale1 );
-        gioc1.setPietrePerGiocatore(pietre);
-
-        Giocatore gioc2 = new Giocatore("Giocatore 2", tamagolem2Vector, pietraElementale2);
-        gioc2.setPietrePerGiocatore(pietre);
-        //fase di scontro
-
-    /*2 giocatori con ciascuno G tamagolem, con ciascun tama con P pietre( di N elementi) e vita V */
-
-        // Gioc1 schiera Tama
-        gioc1.schieraTamagolem(vita, tamagolem, pietre);
-
-        // Gioc2 schiera Tama
-        gioc2.schieraTamagolem(vita, tamagolem, pietre);
-
-    /* a questo punto ho 2 giocatori, ciascuno con un solo tamagolem, il quale è stato aggiunto al vettore dei tamgolems di ciascun giocatore
-    alla prima posizione, e ciascun tamagolem ha mangiato P pietre */
-        int scelta=0;
-        Tamagolem tamaDelGioc1 = gioc1.scegliTamaPerScontro(scelta);
-        Tamagolem tamaDelGioc2 = gioc2.scegliTamaPerScontro(scelta);
-
-        for (int i = 0; i< pietre; i++){
-            controlloDanni(tamaDelGioc1, tamaDelGioc2, i);
-        }
-
-
-    /*I tama scagliano Pietra
-    Determinazione vincita scontro
-    Inserire questi metodi in un ciclo do while(G > 0 per entrambi i giocatori)
-     */
-
-        Scontro scontro = new Scontro();
-
-        scontro.eseguiScontro(gioc1, gioc2);
+        int scelta =0;
+        do {
 
 
 
+            scelta = InputDati.leggiIntero(SCELTA, 0, 1);
+            switch (scelta) {
+                case 1:
+                    //fase di setup
+                    EquilibrioMondo equilibrioMondo = new EquilibrioMondo();
 
-        //fase dichiarazione vincitore
-    /*
-    vince chi ha G>0
-    Stampa equilibrio
-     */
-        equilibrioMondo.stampaEquilibrio(matrice);
+                    //menu
+                    System.out.println(MEX_BENVENUTO);
+                    System.out.println(LIVELLO_FACILE);
+                    System.out.println(LIVELLO_MEDIO);
+                    System.out.println(LIVELLO_DIFFICILE);
+                    //fase di setUp
+                    int livello = 0;
+                    livello = InputDati.leggiIntero("");
+                    int S = 0, P = 0, G = 0;
+                    P = Math.round((livello + 1) / 3) + 1;
+
+                    G = Math.round(((livello-1)*(livello-2))/2*P);
+                    S = Math.round((2 * G * P) / livello) * livello;
+                    System.out.println(G);
+                    EquilibrioMondo equi = new EquilibrioMondo();
+                    equi.generaEquilibrio(equi.getEquilibrio(), livello);
+                    /* Creazione di S pietre totali*/
+                    equi.generaPietre(S, livello);
+                    Vector<Tamagolem> tams1 = new Vector<>();
+                    Vector<Tamagolem> tams2 = new Vector<>();
+                    Vector<String> pietreElementali1 = new Vector<>();
+                    Vector<String> pietreElementali2 = new Vector<>();
+                    int i = 0;
+                    int j = 0;
+
+                    //fase di scontro
+                    int G1=G, G2=G;
+                    /*Inizializzazione del giocatore 1 con il suo tamagolem*/
+                    Giocatore player1 = new Giocatore(InputDati.leggiStringa(IN_NOME +1), tams1, pietreElementali1);
+                    player1.schieraTamagolem(VITA, G1);
+                    Tamagolem tama1 = player1.scegliTamaPerScontro(i);
+                    player1.setPietrePerGiocatore(P, S, pietreElementali1, equi.getPietreTotali(), tama1);
+
+                    /*inizializzazione del giocatore 2 con il suo tamagolem*/
+                    Giocatore player2 = new Giocatore(InputDati.leggiStringa(IN_NOME + 2), tams2, pietreElementali2);
+                    player2.schieraTamagolem(VITA, G2);
+                    Tamagolem tama2 = player2.scegliTamaPerScontro(j);
+                    player2.setPietrePerGiocatore(P, S, pietreElementali2, equi.getPietreTotali(), tama2);
+
+                    Scontro scontro = new Scontro();
+                    String pietra1 ="";
+                    String pietra2="";
+
+
+
+
+
+
+
+                    do {
+                        //k1 e k2 sono gli indici delle pietre da scagliare
+                        int k1 = 0;
+                        int k2 = 0;
+                        do {
+
+                            /*date due pietre che vengono lanciate contemporaneamente, si confrontano e
+                             si effettuano opportuni calcoli sulla vita*/
+
+                            pietra1 = tama1.scagliaPietra(k1);
+                            tama1.mangiaPietra(tama1.scagliaPietra(k1));
+                            pietra2 = tama2.scagliaPietra(k2);
+                            tama2.mangiaPietra(tama2.scagliaPietra(k2));
+                            scontro.calcoloDanno(tama1, tama2, pietra1, pietra2, equi.getEquilibrio(), equi.getTipo());
+                            k2++;
+                            k1++;
+                            //controllo per evitare di uscire dalla dimensione della linkedList
+                            if (k1>P)
+                                k1=0;
+                            if (k2>P)
+                                k2=0;
+                            //il secondo controllo serve per evitare che riproduca in loop "Pareggio"
+                        } while (!scontro.controlloVita(tama1, tama2) && scontro.calcoloDanno(tama1, tama2, pietra1, pietra2, equi.getEquilibrio(), equi.getTipo()));
+                        //controllo in caso di parità e si ricomincia lo socntro
+                        if (!scontro.calcoloDanno(tama1, tama2, pietra1, pietra2, equi.getEquilibrio(), equi.getTipo())) {
+                            i++; j++;
+                            player1.schieraTamagolem(VITA, G1);
+                            tama1 = player1.scegliTamaPerScontro(i);
+                            player1.setPietrePerGiocatore(P, S, pietreElementali1, equi.getPietreTotali(), tama1);
+                            player2.schieraTamagolem(VITA, G2);
+                            tama2 = player2.scegliTamaPerScontro(j);
+                            player2.setPietrePerGiocatore(P, S, pietreElementali2, equi.getPietreTotali(), tama2);
+
+                        }
+                        //solo il giocatore sconfitto deve ricreare un tamagolem
+                        else if (scontro.vinciScontro(tama1, tama2).equals(tama1)) {
+                            System.out.println(SCONTRO_VINTO + player1.getNome());
+                            j++;
+                            G2--;
+                            player2.schieraTamagolem(VITA, G2);
+                            tama2 = player2.scegliTamaPerScontro(j);
+                            player2.setPietrePerGiocatore(P, S, pietreElementali2, equi.getPietreTotali(), tama2);
+                        } else if (scontro.vinciScontro (tama1, tama2).equals(tama1)){
+                            System.out.println(SCONTRO_VINTO + player2.getNome());
+                            i++;
+                            G1--;
+                            player1.schieraTamagolem(VITA, G1);
+                            tama1 = player1.scegliTamaPerScontro(i);
+                            player1.setPietrePerGiocatore(P, S, pietreElementali1, equi.getPietreTotali(), tama1);
+
+                        }
+                    } while (!scontro.vinciPartita(player1, player2,G1, G2));
+
+                    equi.stampaEquilibrio(equi.getEquilibrio());
+                    break;
+                case 0:
+                    break;
+            }
+
+        }while (scelta!=0);
+
     }
 
-    private static void controlloDanni(Tamagolem tama1, Tamagolem tama2, int i) {
-        int danni1 = tama1.scagliaPietra(i).getDanni();
-        int danni2 = tama2.scagliaPietra(i).getDanni();
-        if (danni1 < danni2) {
-            tama1.togliVita(danni2);
-            if (tama1.getVita()==0) System.out.println("Il tama è morto");
-            else System.out.println("Tama1 ha subito danni");
-        }
-        else if (danni2 < danni1) {
-            tama2.togliVita(danni1);
-            if (tama2.getVita() == 0) System.out.println("Il tama è morto");
-            System.out.println("Tama2 ha subito danni");
-        } else if (danni1 == danni2) {
-            System.out.println("pareggio");
-        }
-    }
+
+
+
+
 
 }

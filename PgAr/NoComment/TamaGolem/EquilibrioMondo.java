@@ -2,9 +2,15 @@ package PgAr.NoComment.TamaGolem;
 import java.util.*;
 public class EquilibrioMondo {
     //aggiungere altri 5 elementi
-    private String[] attacco ={"Terra", "Aria","Acqua","Fuoco"};
-    private String[] tipo ={"Terra", "Aria","Acqua","Fuoco"};
-
+    //Questi due vettori costituiranno le righe e le colonne della matriche che rappresenta l'equilibrio
+    private String[] attacco ={"Terra", "Aria","Acqua","Fuoco", "Suono", "Fulmini", "Ombra", "Erba", "Veleno"};
+    private String[] tipo ={"Terra", "Aria","Acqua","Fuoco", "Suono", "Fulmini", "Ombra","Erba","Veleno"};
+    //private Integer [][]equilibrio = new Integer[][];
+    private Integer equilibrio[][]= {{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0}};
+    LinkedList <String> pietreTotali = new LinkedList <String>();
+    /*a seconda del livello scelto genererà tot numeri casuali che
+     poi andrà casualmente a inserire (con i dovuti controlli)
+     */
     public void generaEquilibrio (Integer[][] matrice, int livello) {
         int rand1, rand2, rand3, rand4, rand5, rand6, rand7, rand8;
         Random rand= new Random();
@@ -247,15 +253,15 @@ public class EquilibrioMondo {
     }
 
 
-    public int confrontaElementi (String elemento1, String elemento2, Integer[][] matrice){
-        for (int i=0; i< tipo.length; i++)
-            for (int j=0; j< attacco.length; j++){
-                if (elemento1.equals(attacco[j]) && elemento2.equals(tipo[i]))
-                    return matrice[j][i];
+    //date S pietre totali, di cui n per tipo me le inserisce tutte in un vettore
+    public LinkedList <String> generaPietre (int S, int N){
+        for (int j=0; j< N; j++)
+            for (int i=0; i<S/N; i++){
+                pietreTotali.add(tipo[j]);
             }
-        //non ritornerà mai zero
-        return 0;
+        return pietreTotali;
     }
+
 
     public void stampaEquilibrio(Integer[][] matrice){
         System.out.print("       ");
@@ -272,7 +278,34 @@ public class EquilibrioMondo {
 
     }
 
+    public String[] getAttacco() {
+        return attacco;
+    }
 
+    public void setAttacco(String[] attacco) {
+        this.attacco = attacco;
+    }
+
+    public String[] getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String[] tipo) {
+        this.tipo = tipo;
+    }
+
+    public LinkedList<String> getPietreTotali() {
+        return pietreTotali;
+    }
+
+    public String getPietra(int i){
+        return pietreTotali.get(i);
+    }
+
+
+    public Integer[][] getEquilibrio() {
+        return equilibrio;
+    }
 
 
 

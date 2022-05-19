@@ -3,56 +3,51 @@ package PgAr.NoComment.TamaGolem;
 import it.unibs.fp.mylib.InputDati;
 
 import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Giocatore {
-
     private String nome;
     private Vector<Tamagolem> tamagolemDelGiocatore;
-    private Vector<PietraElementale> pietre;
+    private Vector<String> pietre;
+
 
     //costruttore Giocatore
-
-    public Giocatore(String nome, Vector<Tamagolem> tamagolemDelGiocatore, Vector<PietraElementale> pietre) {
+    public Giocatore(String nome, Vector<Tamagolem> tamagolemDelGiocatore, Vector<String> pietre) {
         this.nome = nome;
         this.tamagolemDelGiocatore = tamagolemDelGiocatore;
         this.pietre = pietre;
     }
 
-    //questo metodo crea P pietre elementali e le aggiunge al vettore del giocatore(pietre)
-    public void setPietrePerGiocatore(int P) {
-        for(int i = 0; i<(P); i++){
-            Random rnd = new Random();
-            PietraElementale pietra = switch (rnd.nextInt(0, 4)) {
-                /*case 0 -> new PietraElementale(Elementi.ACQUA.name());
-                case 1 -> new PietraElementale(Elementi.TERRA.name());
-                case 2 -> new PietraElementale(Elementi.FUOCO.name());
-                case 3 -> new PietraElementale(Elementi.ARIA.name());*/
-                default -> throw new IllegalStateException("Unexpected value: " + rnd.nextInt(0, 4));
-            };
-            aggiungiPietra(pietra);
+    //Permette di far scegliere al giocatore le pietre per il suo tamagolem
+    public void setPietrePerGiocatore(int P, int S, Vector <String> pietre, LinkedList <String> pietreTotali, Tamagolem tama) {
+        for(int i = 0; i<S; i++){
+            System.out.print(i+1);
+            System.out.println(". "+ pietreTotali.get(i));
         }
+        int scelta;
+        System.out.println("Scegli " +P+ " pietre da usare");
+        for (int i=0; i<P; i++){
+            scelta = InputDati.leggiIntero("");
+            tama.mangiaPietra(pietreTotali.get(scelta-1));
+            pietreTotali.remove(scelta-1);
+
+
+        }
+
     }
 
-    private void aggiungiPietra(PietraElementale pietra) {
-        pietre.add(pietra);
-    }
+
     public Tamagolem scegliTamaPerScontro(int i){
         return tamagolemDelGiocatore.elementAt(i);
     }
-    // metodi per schierare tama:
-    public void schieraTamagolem(int vita, int numeroTama, int pietrePerTama) {
-        Vector<PietraElementale> pietreMangiate = new Vector<>();
+    //crea un nuovo Tama (se c'è ne sono ancora a disposizione) e gli da una vita
+    public void schieraTamagolem(int vita, int numeroTama) {
+        Vector<String> pietreMangiate = new Vector<>();
         Tamagolem tamagolem = new Tamagolem(vita, pietreMangiate); //creo un tama di vita v e di pietreMangiate inizialmente vuoto
-        if (getNumeroTamagolem() <= numeroTama){
+        if (0<= numeroTama){
             aggiungiTamagolems(tamagolem); //lo aggiungo ai tama del giocatore
             System.out.println("Hai creato un tamagolem");
-            System.out.println("Quali pietre vuoi far mangiare a questo Tamagolem?\nScegline " + pietrePerTama);
-            visualizzaPietre();
-            for(int i = 0; i < pietrePerTama; i++){
-                int scelta = InputDati.leggiIntero("Inserisci il numero della pietra che vuoi aggiungere", 1, pietrePerTama);
-                daiPietraAlTamagolem(tamagolem, scelta); //metodo che fa mangiare al tamagolem la pietra scelta
-            }
+
         } else {
             System.out.println("Non puoi più schierare tamagolem!");
         }
@@ -65,23 +60,21 @@ public class Giocatore {
         tamagolemDelGiocatore.add(tamagolem);
     }
 
-    public void visualizzaPietre() {
+    public void visualizzaPietre(LinkedList <String> pietre) {
         for (int i=0; i<pietre.size(); i++){
-            System.out.println(i + ".\t" + pietre.elementAt(i).toString());
+            System.out.println(i + ".\t" + pietre.get(i).toString());
         }
     }
 
-    private void daiPietraAlTamagolem(Tamagolem tamagolem, int scelta) {
-        tamagolem.mangiaPietra(getPietra(scelta));
-        System.out.println("La pietra " + getPietra(scelta).toString() + "è stata mangiata dal Tamagolem, YUM!");
-        rimuoviPietra(scelta);
+
+
+
+
+    public String getNome() {
+        return nome;
     }
 
-    public PietraElementale getPietra(int i){
-        return pietre.elementAt(i);
-    }
 
-    public void rimuoviPietra(int i) {
-        pietre.remove(i);
-    }
+
+
 }
