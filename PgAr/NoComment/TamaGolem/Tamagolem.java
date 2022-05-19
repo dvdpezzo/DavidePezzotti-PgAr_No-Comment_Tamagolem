@@ -1,6 +1,6 @@
 package PgAr.NoComment.TamaGolem;
 
-import java.util.Queue;
+import java.util.Vector;
 
 public class Tamagolem {
     private int vita;
@@ -9,22 +9,21 @@ public class Tamagolem {
         return vita;
     }
 
-    public void setVita(int vita) {
+    private Vector<PietraElementale> pietreMangiate;
+
+    public Tamagolem(int vita, Vector<PietraElementale> pietreMangiate) {
         this.vita = vita;
+        this.pietreMangiate = pietreMangiate;
     }
 
-    private Queue<PietraElementale> pietreMangiate;
-
-    public Tamagolem(int vita) {
-        this.vita = vita;
+    public PietraElementale scagliaPietra(int i){
+        pietreMangiate.get(i);
     }
 
-    public int attacca(){
-        return 0;
-    }
-
-    public int togliVita(){
-        return 0;
+    public int togliVita(int danniSubiti){ //(setVita)
+        if (vita > danniSubiti) vita -= danniSubiti;
+        else vita = 0;
+        return vita;
     }
 
     public void mangiaPietra(PietraElementale pietraElementale){

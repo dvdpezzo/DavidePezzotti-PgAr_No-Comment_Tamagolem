@@ -2,8 +2,8 @@ package PgAr.NoComment.TamaGolem;
 import java.util.*;
 public class EquilibrioMondo {
     //aggiungere altri 5 elementi
-    String[] attacco ={"Terra", "Aria","Acqua","Fuoco"};
-    String[] tipo ={"Terra", "Aria","Acqua","Fuoco"};
+    private String[] attacco ={"Terra", "Aria","Acqua","Fuoco"};
+    private String[] tipo ={"Terra", "Aria","Acqua","Fuoco"};
 
     public void generaEquilibrio (Integer[][] matrice, int livello) {
         int rand1, rand2, rand3, rand4, rand5, rand6, rand7, rand8;
@@ -247,7 +247,7 @@ public class EquilibrioMondo {
     }
 
 
-    public int confrontaElementi (String elemento1, String elemento2, Integer[][] matrice, String[] attacco, String[] tipo){
+    public int confrontaElementi (String elemento1, String elemento2, Integer[][] matrice){
         for (int i=0; i< tipo.length; i++)
             for (int j=0; j< attacco.length; j++){
                 if (elemento1.equals(attacco[j]) && elemento2.equals(tipo[i]))

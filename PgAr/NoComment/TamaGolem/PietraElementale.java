@@ -8,4 +8,8 @@ public class PietraElementale {
     public PietraElementale(String tipoElementoPietra) {
         this.tipoElementoPietra = tipoElementoPietra;
     }
+
+    public int getDanni() {
+        return 0;
+    }
 }
