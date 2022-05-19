@@ -8,26 +8,26 @@ import java.util.Vector;
 public class Giocatore {
 
     private String nome;
-    private Vector<Tamagolem> tamagolems;
+    private Vector<Tamagolem> tamagolemDelGiocatore;
     private Vector<PietraElementale> pietre;
 
     //costruttore Giocatore
 
-    public Giocatore(String nome, Vector<Tamagolem> tamagolems, Vector<PietraElementale> pietre) {
+    public Giocatore(String nome, Vector<Tamagolem> tamagolemDelGiocatore, Vector<PietraElementale> pietre) {
         this.nome = nome;
-        this.tamagolems = tamagolems;
+        this.tamagolemDelGiocatore = tamagolemDelGiocatore;
         this.pietre = pietre;
     }
 
-    //questo metodo crea S pietre elementali e le aggiunge al vettore del giocatore(pietre)
-    public void setPietrePerGiocatore(int S) {
-        for(int i = 0; i<(S/2); i++){
+    //questo metodo crea P pietre elementali e le aggiunge al vettore del giocatore(pietre)
+    public void setPietrePerGiocatore(int P) {
+        for(int i = 0; i<(P); i++){
             Random rnd = new Random();
             PietraElementale pietra = switch (rnd.nextInt(0, 4)) {
-                case 0 -> new PietraElementale(Elementi.ACQUA.name());
+                /*case 0 -> new PietraElementale(Elementi.ACQUA.name());
                 case 1 -> new PietraElementale(Elementi.TERRA.name());
                 case 2 -> new PietraElementale(Elementi.FUOCO.name());
-                case 3 -> new PietraElementale(Elementi.ARIA.name());
+                case 3 -> new PietraElementale(Elementi.ARIA.name());*/
                 default -> throw new IllegalStateException("Unexpected value: " + rnd.nextInt(0, 4));
             };
             aggiungiPietra(pietra);
@@ -38,30 +38,31 @@ public class Giocatore {
         pietre.add(pietra);
     }
     public Tamagolem scegliTamaPerScontro(int i){
-        return tamagolems.elementAt(i);
+        return tamagolemDelGiocatore.elementAt(i);
     }
     // metodi per schierare tama:
     public void schieraTamagolem(int vita, int numeroTama, int pietrePerTama) {
-        Tamagolem tamagolem = new Tamagolem(vita); //creo un tama di vita v
+        Vector<PietraElementale> pietreMangiate = new Vector<>();
+        Tamagolem tamagolem = new Tamagolem(vita, pietreMangiate); //creo un tama di vita v e di pietreMangiate inizialmente vuoto
         if (getNumeroTamagolem() <= numeroTama){
             aggiungiTamagolems(tamagolem); //lo aggiungo ai tama del giocatore
             System.out.println("Hai creato un tamagolem");
             System.out.println("Quali pietre vuoi far mangiare a questo Tamagolem?\nScegline " + pietrePerTama);
+            visualizzaPietre();
             for(int i = 0; i < pietrePerTama; i++){
-                visualizzaPietre();
-                int scelta = daiPietraAlTamagolem(tamagolem, pietrePerTama);
-                rimuoviPietra(scelta);
+                int scelta = InputDati.leggiIntero("Inserisci il numero della pietra che vuoi aggiungere", 1, pietrePerTama);
+                daiPietraAlTamagolem(tamagolem, scelta); //metodo che fa mangiare al tamagolem la pietra scelta
             }
         } else {
             System.out.println("Non puoi più schierare tamagolem!");
         }
     }
     public int getNumeroTamagolem(){
-        return tamagolems.size();
+        return tamagolemDelGiocatore.size();
     }
 
     public void aggiungiTamagolems(Tamagolem tamagolem){
-        tamagolems.add(tamagolem);
+        tamagolemDelGiocatore.add(tamagolem);
     }
 
     public void visualizzaPietre() {
@@ -70,11 +71,10 @@ public class Giocatore {
         }
     }
 
-    private int daiPietraAlTamagolem(Tamagolem tamagolem, int pietrePerTama) {
-        int scelta = InputDati.leggiIntero("Inserisci il numero della pietra che vuoi aggiungere", 1, pietrePerTama);
+    private void daiPietraAlTamagolem(Tamagolem tamagolem, int scelta) {
         tamagolem.mangiaPietra(getPietra(scelta));
         System.out.println("La pietra " + getPietra(scelta).toString() + "è stata mangiata dal Tamagolem, YUM!");
-        return scelta;
+        rimuoviPietra(scelta);
     }
 
     public PietraElementale getPietra(int i){
