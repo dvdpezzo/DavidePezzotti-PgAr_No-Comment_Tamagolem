@@ -1,6 +1,6 @@
 package PgAr.NoComment.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
+//import it.unibs.fp.mylib.InputDati;
 
 import java.util.Random;
 import java.util.*;
@@ -29,7 +29,7 @@ public class Giocatore {
         for (int i=0; i<P; i++){
             scelta = InputDati.leggiIntero("");
             tama.mangiaPietra(pietreTotali.get(scelta-1));
-            pietreTotali.remove(scelta-1);
+            //pietreTotali.remove(scelta-1);
 
 
         }

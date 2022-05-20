@@ -21,7 +21,7 @@ public class Tamagolem {
     }
 
     public int togliVita(int danniSubiti){ //(setVita)
-        if (vita > danniSubiti) vita -= danniSubiti;
+        if (vita > danniSubiti) setVita(getVita()-danniSubiti);
         else vita = 0;
         return vita;
     }
@@ -29,4 +29,11 @@ public class Tamagolem {
     public void mangiaPietra(String pietraElementale){
         pietreMangiate.add(pietraElementale);
     }
+
+    public void setVita(int vita) {
+        this.vita = vita;
+    }
+
+
+
 }

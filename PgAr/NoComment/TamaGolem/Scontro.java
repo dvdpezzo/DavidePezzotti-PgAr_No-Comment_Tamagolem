@@ -10,7 +10,7 @@ public class Scontro {
 
     //EquilibrioMondo equi = new EquilibrioMondo();
     /*
-    * dati due tamagolem e due pietre lanciate farà i dovuti controlli ed eventualmente toglierà vita  * */
+     * dati due tamagolem e due pietre lanciate farà i dovuti controlli ed eventualmente toglierà vita  * */
     public boolean calcoloDanno (Tamagolem tama1, Tamagolem tama2, String pietra1, String pietra2, Integer matrice[][], String[]tipo){
         int danno=0;
         for (int i=0; i<tipo.length; i++)
@@ -20,10 +20,12 @@ public class Scontro {
                     if (danno>0) {
                         tama1.togliVita(danno);
                         System.out.println(TAMAGOLEM_DEL_GIOCATORE + 1 + PERSO_PT);
+                        return true;
                     }
                     else if(danno<0) {
                         tama2.togliVita(-danno);
                         System.out.println(TAMAGOLEM_DEL_GIOCATORE + 2 + PERSO_PT);
+                        return true;
                     }
                     else {
                         System.out.println("Pareggio!");
@@ -56,5 +58,4 @@ public class Scontro {
             return true;
         } else return false;
     }
-
 }

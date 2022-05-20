@@ -1,12 +1,10 @@
 package PgAr.NoComment.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
+//import it.unibs.fp.mylib.InputDati;
 
 import java.util.Vector;
 
 public class Main {
-
-
     private static final int VITA = 10;
     public static final String SCELTA = "Premere 1, per iniziare una nuova partita, premere 0 per chiudere il programma";
     public static final String MEX_BENVENUTO = "Benvenuta/o su Tamagolem, prima di iniziare facci sapere con quanti tipi di pietre vuoi iniziare:";
@@ -37,11 +35,11 @@ public class Main {
                     int livello = 0;
                     livello = InputDati.leggiIntero("");
                     int S = 0, P = 0, G = 0;
-                    P = Math.round((livello + 1) / 3) + 1;
+                    P = (int)Math.round((livello + 1) / 3)+1;
 
-                    G = Math.round(((livello-1)*(livello-2))/2*P);
-                    S = Math.round((2 * G * P) / livello) * livello;
-                    System.out.println(G);
+                    G = (int)Math.round(((livello-1)*(livello-2))/2*P);
+                    S = (int)Math.round((2 * G * P) / livello) * livello;
+                    System.out.println(S);
                     EquilibrioMondo equi = new EquilibrioMondo();
                     equi.generaEquilibrio(equi.getEquilibrio(), livello);
                     /* Creazione di S pietre totali*/
@@ -94,9 +92,9 @@ public class Main {
                             k2++;
                             k1++;
                             //controllo per evitare di uscire dalla dimensione della linkedList
-                            if (k1>P)
+                            if (k1>=P)
                                 k1=0;
-                            if (k2>P)
+                            if (k2>=P)
                                 k2=0;
                             //il secondo controllo serve per evitare che riproduca in loop "Pareggio"
                         } while (!scontro.controlloVita(tama1, tama2) && scontro.calcoloDanno(tama1, tama2, pietra1, pietra2, equi.getEquilibrio(), equi.getTipo()));
@@ -119,7 +117,7 @@ public class Main {
                             player2.schieraTamagolem(VITA, G2);
                             tama2 = player2.scegliTamaPerScontro(j);
                             player2.setPietrePerGiocatore(P, S, pietreElementali2, equi.getPietreTotali(), tama2);
-                        } else if (scontro.vinciScontro (tama1, tama2).equals(tama1)){
+                        } else if (scontro.vinciScontro (tama1, tama2).equals(tama2)){
                             System.out.println(SCONTRO_VINTO + player2.getNome());
                             i++;
                             G1--;
@@ -139,7 +137,6 @@ public class Main {
         }while (scelta!=0);
 
     }
-
 
 
 
